@@ -8,14 +8,34 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    var dataService = DataService()
+    
+    @State var jokeResponse: JokeResponse?
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Button {
+                Task {
+                    await getJoke()
+                }
+            } label: {
+                Text("Get Joke")
+            }
+
         }
         .padding()
+        .task {
+            await getJoke()
+        }
+    }
+    
+    func getJoke() async {
+        do {
+            jokeResponse = try await dataService.getJoke()
+        } catch {
+            print(error)
+        }
     }
 }
 
