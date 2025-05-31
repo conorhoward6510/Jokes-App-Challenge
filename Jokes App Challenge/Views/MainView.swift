@@ -15,6 +15,27 @@ struct MainView: View {
     
     var body: some View {
         VStack {
+            
+            Spacer()
+            
+            if let jokeResponse = jokeResponse {
+                
+                switch jokeResponse.type {
+                case .single:
+                    Text("\(jokeResponse.joke!)")
+                        .font(.title)
+                case .twopart:
+                    Text("\(jokeResponse.setup!)")
+                        .font(.title)
+                        .padding(.bottom,40)
+                    Text("\(jokeResponse.delivery!)")
+                        .font(.title2)
+                }
+                
+            }
+            
+            Spacer()
+            
             Button {
                 Task {
                     await getJoke()
