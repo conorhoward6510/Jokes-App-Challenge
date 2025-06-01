@@ -41,7 +41,13 @@ struct MainView: View {
                     await getJoke()
                 }
             } label: {
-                Text("Get Joke")
+                ZStack {
+                    Rectangle()
+                        .frame(height: 44)
+                        .cornerRadius(15)
+                    Text("Get Joke")
+                        .foregroundStyle(.white)
+                }
             }
 
         }
